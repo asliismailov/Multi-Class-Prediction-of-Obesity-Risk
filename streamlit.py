@@ -73,6 +73,19 @@ with prediction_tab:
     selected_height = st.number_input("Boy (cm)", min_value=50, max_value=300, value=170, step=1)
     selected_ch2o = st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100)
 
+    def predict_obesity_risk(age, gender, weight, height, ch2o):
+        # Modeli kullanarak tahmin yapma
+        data = {
+            'Age': [age],
+            'Gender': [gender],
+            'Weight': [weight],
+            'Height': [height],
+            'CH2O': [ch2o]
+        }
+        df = pd.DataFrame(data)
+        prediction = model.predict(df)[0]
+        return prediction
+
     if st.button("Tahminle"):
         # Cinsiyetin sayısal değerine dönüştürülmesi
         gender_numeric = gender_options[selected_gender]
@@ -80,4 +93,3 @@ with prediction_tab:
         # Tahmin fonksiyonunu çağırma
         prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o)
         st.write("Tahmin Edilen Obezite Riski:", prediction)
-
