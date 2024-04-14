@@ -44,4 +44,3 @@ if submit_button:
     data_preprocessed = preprocessor.fit_transform(data_df)
     prediction = model.predict(data_preprocessed)
     st.write(f"Tahmin edilen obezite durumu: {prediction[0]}")
-
