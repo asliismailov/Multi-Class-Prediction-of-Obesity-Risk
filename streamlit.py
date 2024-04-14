@@ -54,6 +54,24 @@ with chart_tab:
 # Tahmin sekmesi
 with prediction_tab:
     st.header("Model ile Tahmin Yapma")
+
+def predict_obesity_risk(age, gender, weight, height, ch2o, bmi):
+    input_data = pd.DataFrame({
+        'Age': [age],
+        'Gender': [gender],
+        'Weight': [weight],
+        'Height': [height],
+        'CH2O': [ch2o],
+        'BMI': [bmi]
+    })
+
+    # Modelin beklendiği sıraya göre sütunları yeniden düzenle
+    expected_features = ['Age', 'Gender', 'Weight', 'Height', 'CH2O', 'BMI']
+    input_data = input_data[expected_features]
+
+    prediction = model.predict(input_data)
+    return prediction
+
     
     with st.form(key='obesity_form'):
         selected_age = st.number_input("Yaş", min_value=0.0, max_value=150.0, value=30.0, step=1.0, format="%.2f")
