@@ -54,11 +54,11 @@ with chart_tab:
 
     with col1:
         st.subheader("Korelasyon Matrisi")
-        st.image("Data Scientist Bootcamp/Final/korelasyon_matrisi.png")
+        st.image("korelasyon.png")
 
     with col2:
         st.subheader("SHAP Değerleri")
-        st.image("Data Scientist Bootcamp/Final/mean_shap_values.png")
+        st.image("SHAP.png")
 
 # Tahmin sekmesi
 def predict_obesity_risk(age, gender, weight, height, ch2o):
