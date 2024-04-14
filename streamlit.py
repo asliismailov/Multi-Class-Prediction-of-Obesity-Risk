@@ -30,8 +30,9 @@ def predict_obesity_risk(age, gender, weight, height, ch2o, bmi):
         'Height': [height],
         'Weight': [weight],
         'CH2O': [ch2o],
-        'BMI': [bmi],
-        # ... burada modeliniz için gerekli diğer özellikleri ekleyin
+        'BMI': [bmi]
+        # Eğer modelinizde daha fazla özellik varsa buraya ekleyin
+        # Örneğin: 'FCVC': [fcvc], 'NObeyesdad': [nobeyesdad], ...
     })
     
     # Sütunları modelin eğitildiği sıraya göre düzenle
