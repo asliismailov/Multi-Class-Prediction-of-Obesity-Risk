@@ -81,4 +81,4 @@ with prediction_tab:
 
     if st.button("Tahminle"):
         # Cinsiyetin sayısal değerine dönüştürülmesi
-       
+
