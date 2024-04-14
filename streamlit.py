@@ -38,3 +38,4 @@ if submitted:
     
     # Tahmini göster
     st.write(f'Tahmin edilen obezite seviyesi: {prediction}')
+
