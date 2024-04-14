@@ -1,47 +1,38 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import joblib
 
-# Modeli joblib ile yükle
-model_path = 'lgbm_model_final.pkl'
-model = joblib.load(model_path)
+# Modeli yükle
+model = joblib.load('lgbm_model_final.pkl')
 
-# Sidebar - Kullanıcı girdileri
-st.sidebar.header('Kullanıcı Girdi Özellikleri')
+# Başlık
+st.title('Obezite Seviyesi Tahmin Uygulaması')
 
-def user_input_features():
-    age = st.sidebar.number_input('Yaş', min_value=1, max_value=100, value=25)
-    height = st.sidebar.number_input('Boy (cm)', min_value=100, max_value=250, value=170)
-    weight = st.sidebar.number_input('Kilo (kg)', min_value=30, max_value=200, value=70)
-    daily_water_intake = st.sidebar.number_input('Günlük Su Tüketimi (litre)', min_value=0.0, max_value=10.0, value=2.0)
-    gender = st.sidebar.selectbox('Cinsiyet', ('Erkek', 'Kadın'))
-    gender = 0 if gender == 'Erkek' else 1
-    data = {'age': [age],
-            'height': [height],
-            'weight': [weight],
-            'daily_water_intake': [daily_water_intake],
-            'gender': [gender]}
-    features = pd.DataFrame(data)
-    return features
+# Kullanıcı girişi için form
+with st.form("my_form"):
+    st.write("Lütfen bilgilerinizi girin:")
+    
+    # Özelliklerin alındığı giriş alanları, modelin beklediği özelliklere göre ayarlanmalıdır.
+    # Bu sadece bir örnektir, gerçek modelinize göre düzenlenmelidir.
+    age = st.number_input('Yaş', min_value=0, max_value=100, value=25)
+    height = st.number_input('Boy (cm)', min_value=100, max_value=250, value=170)
+    weight = st.number_input('Kilo (kg)', min_value=20, max_value=200, value=70)
+    # Buraya modelin gerektirdiği diğer özelliklerin girişleri eklenecek
+    
+    # Formu gönderme düğmesi
+    submitted = st.form_submit_button("Tahmin Yap")
 
-input_df = user_input_features()
-
-# Main Page
-st.write("""
-# Basit Obezite Tahmin Uygulaması
-Bu uygulama, LightGBM modeli kullanarak obezite seviyenizi tahmin eder!
-""")
-
-# Tahminleri göster
-st.subheader('Kullanıcı Girdi Özellikleri')
-st.write(input_df)
-
-st.subheader('Tahmin Edilen Obezite Seviyesi')
-prediction = model.predict(input_df)
-st.write(prediction[0])
-
-# CSV dosyasını yükleme ve görselleştirme
-st.subheader('Tahmin Edilen Obezite Seviyeleri (CSV)')
-data_path = 'predicted_obesity_levels.csv'
-data = pd.read_csv(data_path)
-st.write(data)
+# Eğer form gönderilirse
+if submitted:
+    # Modelin beklediği özellik sırasına göre bir DataFrame oluştur
+    # Özellik isimleri modelin eğitildiği veri setiyle aynı olmalıdır.
+    feature_values = [age, height, weight]  # Bu liste modelin beklediği özelliklerle doldurulmalıdır
+    feature_names = ['age', 'height', 'weight']  # Bu da özellik isimleriyle doldurulmalıdır
+    input_data = pd.DataFrame([feature_values], columns=feature_names)
+    
+    # Tahmin yap
+    prediction = model.predict(input_data)[0]
+    
+    # Tahmini göster
+    st.write(f'Tahmin edilen obezite seviyesi: {prediction}')
