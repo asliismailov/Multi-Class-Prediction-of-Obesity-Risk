@@ -27,8 +27,8 @@ def predict_obesity_risk(age, gender, weight, height, ch2o, bmi):
     input_data = pd.DataFrame({
         'Age': [age],
         'Gender': [gender],
-        'Height': [height],
         'Weight': [weight],
+        'Height': [height],
         'CH2O': [ch2o],
         'BMI': [bmi]
     })
