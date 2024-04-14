@@ -31,11 +31,14 @@ def predict_obesity_risk(age, gender, weight, height, ch2o):
         'Height': [height],
         'CH2O': [ch2o]
     })
+    
+    # Özelliklerin doğru sırayla ve doğru sayıda olduğundan emin olun
+    # Bu özellikler ve sıraları, modeli eğitirken kullandığınız veri setine göre olmalı
     prediction = model.predict(input_data)
     return prediction
 
 # Ana Sayfa layout
-main_tab, chart_tab, prediction_tab = st.columns(3)
+main_tab, chart_tab, prediction_tab = st.tabs(["Ana Sayfa", "Grafikler", "Model"])
 
 # Ana Sayfa içeriği
 with main_tab:
@@ -50,10 +53,6 @@ with chart_tab:
     st.header("Analitik Grafikler")
     # İsterseniz grafikleri burada gösterebilirsiniz.
 
-def calculate_bmi(height, weight):
-    bmi = weight / (height ** 2)
-    return bmi
-
 # Tahmin sekmesi
 with prediction_tab:
     st.header("Model ile Tahmin Yapma")
@@ -61,18 +60,22 @@ with prediction_tab:
     with st.form(key='obesity_form'):
         selected_age = st.number_input("Yaş", min_value=0, max_value=150, value=30, step=1)
         selected_gender = st.radio("Cinsiyet", list(gender_options.keys()))
-        selected_gender = gender_dict[gender_options[selected_gender]]  # Cinsiyeti integer'a dönüştürme
         selected_weight = st.number_input("Kilo (kg)", min_value=20, max_value=500, value=70, step=1)
         selected_height = st.number_input("Boy (cm)", min_value=50, max_value=300, value=170, step=1)
         selected_ch2o = st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100)
         submit_button = st.form_submit_button(label='Tahminle')
 
         if submit_button:
-            # BMI hesapla
-            bmi = calculate_bmi(selected_height / 100, selected_weight)
-            
+            # Kullanıcı seçimini sayısal değere dönüştürme
+            gender_numeric = gender_dict[gender_options[selected_gender]]
+            # BMI hesaplama
+            def calculate_bmi(height, weight):
+                bmi = weight / (height / 100) ** 2  # boy cm, kilo kg cinsinden
+                return bmi
+            bmi = calculate_bmi(selected_height, selected_weight)
             # Tahmin fonksiyonunu çağırma
-            prediction = predict_obesity_risk(selected_age, selected_gender, selected_weight, selected_height, selected_ch2o)
+            prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o)
             st.write("Tahmin Edilen Obezite Riski:", prediction)
-            st.write("Hesaplanan BMI:", bmi)
+
+# Not: CSV dosya yolu ve model dosya yolu, kodunuzun çalıştığı ortama göre değiştirilmelidir.
 
