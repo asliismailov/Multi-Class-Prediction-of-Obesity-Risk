@@ -57,10 +57,7 @@ with col2:
    st.header("Shap")
    st.image("SHAP.png")
 
-#Tahmin ########################################################
-
 # Tahmin ########################################################
-
 if prediction_tab.button("Model"):
     model_cont = st.container()
     with model_cont:
@@ -76,12 +73,14 @@ if prediction_tab.button("Model"):
 
         # BMI hesaplama fonksiyonu
         def calculate_bmi(height, weight):
-            bmi = weight / ((height/100) ** 2)  # Boyu cm olarak aldığı için 100'e bölüyoruz
+            bmi = weight / ((height/100) ** 2)  # Boyu cm cinsinden aldığımız için metreye çeviriyoruz
             return bmi
 
         # BMI hesapla
         bmi = calculate_bmi(selected_height, selected_weight)
-        
+
         # Tahmini hesapla ve göster
         if st.button("Tahminle"):
-            prediction = predict_obesity_risk(selected_age, selected_gender, selected_weight, selected_height, selected_CH2O,
+            prediction = predict_obesity_risk(selected_age, selected_gender, selected_weight, selected_height, selected_CH2O, selected_FCVC, bmi)
+            st.write("Tahmin Edilen Obezite Riski:", prediction)
+            st.balloons()
