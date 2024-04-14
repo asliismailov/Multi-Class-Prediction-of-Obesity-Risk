@@ -59,6 +59,8 @@ with col2:
 
 #Tahmin ########################################################
 
+# Tahmin ########################################################
+
 if prediction_tab.button("Model"):
     model_cont = st.container()
     with model_cont:
@@ -70,18 +72,4 @@ if prediction_tab.button("Model"):
         selected_weight = st.number_input("Kilo (kg)", min_value=20, max_value=500, value=70, step=1)
         selected_height = st.number_input("Boy (cm)", min_value=50, max_value=300, value=170, step=1)
         selected_CH2O = st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100)
-        selected_FCVC = st.number_input("Sebze Tüketilen Öğün Sayısı", min_value=0, max_value=3, value=1, step=1)
-
-        # BMI hesaplama fonksiyonu
-        def calculate_bmi(height, weight):
-            bmi = weight / (height ** 2)
-            return bmi
-
-        # BMI hesapla
-        bmi = calculate_bmi(selected_height, selected_weight)
-        
-        # Tahmini hesapla ve göster
-        if st.button("Tahminle"):
-            prediction = predict_obesity_risk(selected_age, selected_gender, selected_weight, selected_height, selected_CH2O,bmi)
-            st.write("Tahmin Edilen Obezite Riski:", prediction)
-            st.balloons()
+        selected_FCVC = st.number_input("Sebze Tüketilen Öğün Sayısı", min_value=0, max_value=3, valu
