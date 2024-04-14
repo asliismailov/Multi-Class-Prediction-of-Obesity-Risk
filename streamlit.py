@@ -60,19 +60,17 @@ if prediction_tab.button("Model"):
         # Formu gönderme düğmesi
         submitted = st.form_submit_button("Tahmin Yap")
 
-    # Eğer form gönderilirse
-    if submitted:
-        # Modelin beklediği özellik sırasına göre bir DataFrame oluştur
-        # Özellik isimleri modelin eğitildiği veri setiyle aynı olmalıdır.
-        feature_values = [selected_age, selected_height, selected_weight]  # Bu liste modelin beklediği özelliklerle doldurulmalıdır
-        feature_names = ['age', 'height', 'weight']  # Bu da özellik isimleriyle doldurulmalıdır
-        input_data = pd.DataFrame([feature_values], columns=feature_names)
-        
-        # Tahmin yap
-        # Burada model ve pipeline'ı yükleyerek predict işlemini gerçekleştirmeniz gerekecek
-        pipeline = get_pipeline()  # Modelinizi yükleyin
-        prediction = pipeline.predict(input_data)[0]
-        
-        # Tahmini göster
-        st.write(f'Tahmin edilen obezite seviyesi: {prediction}')
-
+        # Eğer form gönderilirse
+        if submitted:
+            # Modelin beklediği özellik sırasına göre bir DataFrame oluştur
+            # Özellik isimleri modelin eğitildiği veri setiyle aynı olmalıdır.
+            feature_values = [selected_age, selected_height, selected_weight]  # Bu liste modelin beklediği özelliklerle doldurulmalıdır
+            feature_names = ['age', 'height', 'weight']  # Bu da özellik isimleriyle doldurulmalıdır
+            input_data = pd.DataFrame([feature_values], columns=feature_names)
+            
+            # Tahmin yap
+            pipeline = get_pipeline()  # Modelinizi yükleyin
+            prediction = pipeline.predict(input_data)[0]
+            
+            # Tahmini göster
+            st.write(f'Tahmin edilen obezite seviyesi: {prediction}')
