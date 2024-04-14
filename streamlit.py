@@ -2,12 +2,11 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
-import pickle
 
 # Özel bir önbellek yöneticisi tanımlama
 custom_cache = st.cache(allow_output_mutation=True, persist=True, suppress_st_warning=True, show_spinner=False)
 
-st.set_page_config(layout = "wide", page_title="Obezite Riskinin Çok Sınıflı Tahmini", page_icon="🎷")
+st.set_page_config(layout="wide", page_title="Obezite Riskinin Çok Sınıflı Tahmini", page_icon="🎷")
 
 @st.cache
 def get_data():
@@ -20,46 +19,36 @@ def get_pipeline():
     pipeline = joblib.load('lgbm_model_final.pkl')
     return pipeline
 
-main_tab, chart_tab, prediction_tab = st.tabs(["Ana Sayfa", "Grafikler", "Model"])
+main_tab, chart_tab, prediction_tab = st.columns(3)
 
-if main_tab == "Ana Sayfa":
-    left_col, right_col = main_tab.columns(2)
+if main_tab.button("Ana Sayfa"):
+    main_tab.write("""Bu projenin amacı, bireylerde kardiyovasküler hastalıklarla ilişkili obezite riskini tahmin etmek için çeşitli faktörleri kullanmaktır. Kardiyovasküler hastalıklar, dünya genelinde sağlık sorunlarının önde gelen nedenlerinden biri olarak kabul edilmektedir. Bu hastalıkların birçoğu obezite ile doğrudan ilişkilidir. Bu nedenle, obeziteyi öngörmek ve bu konuda farkındalık yaratmak önemlidir.""")
 
-    left_col.write("""Bu projenin amacı, bireylerde kardiyovasküler hastalıklarla ilişkili obezite riskini tahmin etmek için çeşitli faktörleri kullanmaktır. Kardiyovasküler hastalıklar, dünya genelinde sağlık sorunlarının önde gelen nedenlerinden biri olarak kabul edilmektedir. Bu hastalıkların birçoğu obezite ile doğrudan ilişkilidir. Bu nedenle, obeziteyi öngörmek ve bu konuda farkındalık yaratmak önemlidir.""")
-
-    left_col.write("""Veri Seti ve Hedef
+    main_tab.write("""Veri Seti ve Hedef
     Bu projede kullanılan veri seti, bireylerin demografik bilgilerini, yaşam tarzı alışkanlıklarını ve fizyolojik ölçümlerini içerir. Ölçümler arasında boy, kilo, günlük su tüketimi, fiziksel aktivite düzeyi gibi faktörler bulunmaktadır. Veri setindeki her bir satır, bir bireyi temsil eder ve bu bireylerin obezite durumları "NObeyesdad" sütununda belirtilmiştir.""")
 
-    #TAVSİYE:Veri setinin bir kısmı eklenebilir
+    # TAVSİYE: Veri setinin bir kısmı eklenebilir
 
-    right_col.write("""Kullanılan Algoritmalar
+    main_tab.write("""Kullanılan Algoritmalar
     Bu proje, LightGBM makine öğrenimi modeli kullanmaktadır. LightGBM, yüksek performanslı ve hızlı bir gradyan arttırma (gradient boosting) algoritmasıdır. Bu algoritma, veri setindeki örüntüleri öğrenerek ve karmaşık ilişkileri modelleyerek obezite riskini tahmin etmek için kullanılır.""")
 
-    right_col.write("""Uygulama: Streamlit ile Model Tahmini
+    main_tab.write("""Uygulama: Streamlit ile Model Tahmini
     Bu projede, geliştirilen modelin kullanıcı dostu bir arayüz ile sunulması amaçlanmıştır. Streamlit adlı Python kütüphanesi, basit ve etkileşimli web uygulamaları oluşturmayı sağlar. Bu projede, geliştirilen LightGBM modeli Streamlit arayüzü ile entegre edilmiştir.
     Kullanıcılar, arayüz üzerinden bireysel özellikleri girebilir ve modele besleyerek obezite risk tahminini alabilirler. Bu tahminler, bireylerin normal kilolu, aşırı kilolu, obez veya aşırı obez olma riskini belirtir.""")
 
-if chart_tab == "Grafikler":
-    col1, col2 = chart_tab.columns(2)
+if chart_tab.button("Grafikler"):
+    chart_tab.write("Grafikler sekmesine hoş geldiniz!")
+    # Buraya grafiklerinizi ekleme işlemleri gelecek
 
-    with col1:
-        st.header("Korelasyon Matrisi")
-        st.image("korelasyon.png")
+if prediction_tab.button("Model"):
+    # Başlık
+    st.title('Obezite Seviyesi Tahmin Uygulaması')
 
-    with col2:
-        st.header("Shap")
-        st.image("SHAP.png")
-
-if main_tab == "Model":
-
-# Başlık
-st.title('Obezite Seviyesi Tahmin Uygulaması')
-
-# Kullanıcı girişi için form
-with st.form("my_form"):
-    st.write("Lütfen bilgilerinizi girin:")
-    
-# Kullanıcıdan bilgileri al
+    # Kullanıcı girişi için form
+    with st.form("my_form"):
+        st.write("Lütfen bilgilerinizi girin:")
+        
+        # Kullanıcıdan bilgileri al
         selected_age = st.number_input("Yaş", min_value=0, max_value=150, value=30, step=1)
         selected_gender = st.radio("Cinsiyet", ["Erkek", "Kadın"])
         selected_weight = st.number_input("Kilo (kg)", min_value=20, max_value=500, value=70, step=1)
@@ -67,21 +56,23 @@ with st.form("my_form"):
         selected_CH2O = st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100)
         selected_FCVC = st.number_input("Sebze Tüketilen Öğün Sayısı", min_value=0, max_value=3, value=1, step=1)
 
-    
-    # Formu gönderme düğmesi
-    submitted = st.form_submit_button("Tahmin Yap")
+        
+        # Formu gönderme düğmesi
+        submitted = st.form_submit_button("Tahmin Yap")
 
-# Eğer form gönderilirse
-if submitted:
-    # Modelin beklediği özellik sırasına göre bir DataFrame oluştur
-    # Özellik isimleri modelin eğitildiği veri setiyle aynı olmalıdır.
-    feature_values = [age, height, weight]  # Bu liste modelin beklediği özelliklerle doldurulmalıdır
-    feature_names = ['age', 'height', 'weight']  # Bu da özellik isimleriyle doldurulmalıdır
-    input_data = pd.DataFrame([feature_values], columns=feature_names)
-    
-    # Tahmin yap
-    prediction = model.predict(input_data)[0]
-    
-    # Tahmini göster
-    st.write(f'Tahmin edilen obezite seviyesi: {prediction}')
-    
+    # Eğer form gönderilirse
+    if submitted:
+        # Modelin beklediği özellik sırasına göre bir DataFrame oluştur
+        # Özellik isimleri modelin eğitildiği veri setiyle aynı olmalıdır.
+        feature_values = [selected_age, selected_height, selected_weight]  # Bu liste modelin beklediği özelliklerle doldurulmalıdır
+        feature_names = ['age', 'height', 'weight']  # Bu da özellik isimleriyle doldurulmalıdır
+        input_data = pd.DataFrame([feature_values], columns=feature_names)
+        
+        # Tahmin yap
+        # Burada model ve pipeline'ı yükleyerek predict işlemini gerçekleştirmeniz gerekecek
+        pipeline = get_pipeline()  # Modelinizi yükleyin
+        prediction = pipeline.predict(input_data)[0]
+        
+        # Tahmini göster
+        st.write(f'Tahmin edilen obezite seviyesi: {prediction}')
+
