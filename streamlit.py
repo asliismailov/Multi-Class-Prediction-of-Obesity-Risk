@@ -145,5 +145,3 @@ def main():
         predict_obesity()
 
 
-if _name_ == "_main_":
-    main()
