@@ -12,10 +12,11 @@ model = load('lgbm_model_final.pkl')
 numerik_ozellikler = ['Age', 'Height', 'Weight']
 kategorik_ozellikler = ['Gender', 'family_history_with_overweight']
 
+# OneHotEncoder setup with handle_unknown='ignore' to handle any unknown categories
 preprocessor = ColumnTransformer(
     transformers=[
         ('num', StandardScaler(), numerik_ozellikler),
-        ('cat', OneHotEncoder(), kategorik_ozellikler)
+        ('cat', OneHotEncoder(handle_unknown='ignore'), kategorik_ozellikler)
     ])
 
 # Başlık
