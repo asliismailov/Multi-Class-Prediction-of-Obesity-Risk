@@ -1,21 +1,22 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
+from joblib import load
 
 # Modelin yüklenmesi
-model = pickle.load(open('lgbm_model_final.pkl', 'rb'))
+model = load('lgbm_model_final.pkl')
 
 # Veri ön işleme için hazırlık
-numerik_ozellikler = ['Age', 'Height', 'Weight', 'FCVC', 'NCP', 'CH2O', 'FAF', 'TUE', 'BMI']
-kategorik_ozellikler = ['Gender', 'family_history_with_overweight', 'FAVC', 'CAEC', 'SMOKE', 'SCC', 'CALC', 'MTRANS']
+numerik_ozellikler = ['Age', 'Height', 'Weight']
+kategorik_ozellikler = ['Gender', 'family_history_with_overweight']
 
+# OneHotEncoder setup with handle_unknown='ignore' to handle any unknown categories
 preprocessor = ColumnTransformer(
     transformers=[
         ('num', StandardScaler(), numerik_ozellikler),
-        ('cat', OneHotEncoder(), kategorik_ozellikler)
+        ('cat', OneHotEncoder(handle_unknown='ignore'), kategorik_ozellikler)
     ])
 
 # Başlık
