@@ -3,9 +3,6 @@ import pandas as pd
 import joblib
 import numpy as np
 
-<iframe src="url"></iframe>
-
-
 # Özel bir önbellek yöneticisi tanımlama
 custom_cache = st.cache(allow_output_mutation=True, persist=True, suppress_st_warning=True, show_spinner=False)
 
