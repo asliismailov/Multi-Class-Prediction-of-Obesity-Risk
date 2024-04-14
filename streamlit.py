@@ -55,12 +55,12 @@ with prediction_tab:
     st.header("Model ile Tahmin Yapma")
 
     with st.form(key='obesity_form'):
-        selected_age = int(st.number_input("Yaş", min_value=0, max_value=150, value=30, step=1))
+        selected_age = st.number_input("Yaş", min_value=0, max_value=150, value=30, step=1)
         selected_gender = st.radio("Cinsiyet", list(gender_options.keys()))
-        selected_gender = gender_dict[selected_gender]  # Cinsiyeti integer'a dönüştürme
-        selected_weight = int(st.number_input("Kilo (kg)", min_value=20, max_value=500, value=70, step=1))
-        selected_height = int(st.number_input("Boy (cm)", min_value=50, max_value=300, value=170, step=1))
-        selected_ch2o = int(st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100))
+        selected_gender = gender_dict[gender_options[selected_gender]]  # Cinsiyeti integer'a dönüştürme
+        selected_weight = st.number_input("Kilo (kg)", min_value=20, max_value=500, value=70, step=1)
+        selected_height = st.number_input("Boy (cm)", min_value=50, max_value=300, value=170, step=1)
+        selected_ch2o = st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100)
         submit_button = st.form_submit_button(label='Tahminle')
 
         if submit_button:
