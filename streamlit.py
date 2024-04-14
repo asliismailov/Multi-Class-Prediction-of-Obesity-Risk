@@ -31,8 +31,6 @@ def predict_obesity_risk(age, gender, weight, height, ch2o, bmi):
         'Weight': [weight],
         'CH2O': [ch2o],
         'BMI': [bmi]
-        # Eğer modelinizde daha fazla özellik varsa buraya ekleyin
-        # Örneğin: 'FCVC': [fcvc], 'NObeyesdad': [nobeyesdad], ...
     })
     
     # Sütunları modelin eğitildiği sıraya göre düzenle
@@ -69,4 +67,4 @@ with prediction_tab:
             gender_numeric = gender_dict[selected_gender]
             bmi_value = calculate_bmi(selected_weight, selected_height)
             prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o, bmi_value)
-            st.write("Tahmin Edilen Obezite Riski:", prediction)
+            st.write("Tahmin Edilen Obezite Riski:", prediction[0])  # prediction bir dizi olduğundan, ilk öğeyi alıyoruz
