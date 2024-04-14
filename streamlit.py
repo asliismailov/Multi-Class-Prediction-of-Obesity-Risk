@@ -8,7 +8,7 @@ st.set_page_config(layout="wide", page_title="Obezite Riskinin Çok Sınıflı T
 # Modeli yükleyecek fonksiyon
 @st.cache(allow_output_mutation=True)
 def get_model():
-    return joblib.load('lgbm_model_final.pkl')
+    return joblib.load('predictions.csv')
 
 # Model yükleniyor
 model = get_model()
@@ -69,3 +69,5 @@ with prediction_tab:
             bmi_value = calculate_bmi(selected_weight, selected_height)
             prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o, bmi_value)
             st.write("Tahmin Edilen Obezite Riski:", prediction)
+
+
