@@ -32,10 +32,11 @@ def predict_obesity_risk(age, gender, weight, height, ch2o):
         'CH2O': [ch2o]
     })
     
-    # Özelliklerin doğru sırayla ve doğru sayıda olduğundan emin olun
+    # Özelliklerin doğru sıra ve sayıda olduğundan emin olun
     # Bu özellikler ve sıraları, modeli eğitirken kullandığınız veri setine göre olmalı
-    prediction = model.predict(input_data)
-    return prediction
+    # Tahmin yerine predict_proba kullanıyorum, çünkü olasılık tahmini yapmak daha uygun olabilir
+    prediction_proba = model.predict_proba(input_data)
+    return prediction_proba
 
 # Ana Sayfa layout
 main_tab, chart_tab, prediction_tab = st.tabs(["Ana Sayfa", "Grafikler", "Model"])
@@ -60,22 +61,6 @@ with prediction_tab:
     with st.form(key='obesity_form'):
         selected_age = st.number_input("Yaş", min_value=0, max_value=150, value=30, step=1)
         selected_gender = st.radio("Cinsiyet", list(gender_options.keys()))
-        selected_weight = st.number_input("Kilo (kg)", min_value=20, max_value=500, value=70, step=1)
-        selected_height = st.number_input("Boy (cm)", min_value=50, max_value=300, value=170, step=1)
-        selected_ch2o = st.number_input("Günlük Su Tüketimi (ml)", min_value=0, max_value=10000, value=2000, step=100)
-        submit_button = st.form_submit_button(label='Tahminle')
+        selected_weight = st
 
-        if submit_button:
-            # Kullanıcı seçimini sayısal değere dönüştürme
-            gender_numeric = gender_dict[gender_options[selected_gender]]
-            # BMI hesaplama
-            def calculate_bmi(height, weight):
-                bmi = weight / (height / 100) ** 2  # boy cm, kilo kg cinsinden
-                return bmi
-            bmi = calculate_bmi(selected_height, selected_weight)
-            # Tahmin fonksiyonunu çağırma
-            prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o)
-            st.write("Tahmin Edilen Obezite Riski:", prediction)
-
-# Not: CSV dosya yolu ve model dosya yolu, kodunuzun çalıştığı ortama göre değiştirilmelidir.
 
