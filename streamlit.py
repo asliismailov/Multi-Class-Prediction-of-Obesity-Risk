@@ -113,7 +113,10 @@ if prediction_tab.button("Model"):
             st.balloons()
 
 # Dış web sayfasını göstermek için iframe kullanımı
+st.write("Dış Web Sayfası")
 components.iframe("https://example.com")
+
+
 
 
 
