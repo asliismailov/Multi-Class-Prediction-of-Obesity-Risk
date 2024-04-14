@@ -81,4 +81,8 @@ with prediction_tab:
 
     if st.button("Tahminle"):
         # Cinsiyetin sayısal değerine dönüştürülmesi
-
+        gender_numeric = gender_dict[gender_options[selected_gender]]
+        
+        # Tahmin fonksiyonunu çağırma
+        prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o)
+        st.write("Tahmin Edilen Obezite Riski:", prediction)
