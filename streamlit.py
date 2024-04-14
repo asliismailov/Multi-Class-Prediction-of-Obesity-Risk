@@ -8,7 +8,7 @@ st.set_page_config(layout="wide", page_title="Obezite Riskinin Çok Sınıflı T
 # Modeli yükleyecek fonksiyon
 @st.cache(allow_output_mutation=True)
 def get_model():
-    return joblib.load('lgbm_model_final.pkl')  # Modelinizi bu şekilde yükleyin
+    return joblib.load('lgbm_model_final.pkl')
 
 # Model yükleniyor
 model = get_model()
@@ -40,7 +40,7 @@ def predict_obesity_risk(age, gender, weight, height, ch2o, bmi):
     return prediction
 
 # Ana Sayfa layout
-main_tab, chart_tab, prediction_tab = st.tabs(["Ana Sayfa", "Grafikler", "Model"])
+main_tab, chart_tab, prediction_tab = st.columns(3)
 
 # Ana Sayfa içeriği
 with main_tab:
