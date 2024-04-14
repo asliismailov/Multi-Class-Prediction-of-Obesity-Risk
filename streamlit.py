@@ -10,13 +10,13 @@ st.set_page_config(layout="wide", page_title="Obezite Riskinin Çok Sınıflı T
 # Özel önbellek ayarları
 @st.cache(allow_output_mutation=True, persist=True, suppress_st_warning=True, show_spinner=False)
 def get_data():
-    dataframe = pd.read_csv("Data Scientist Bootcamp/Final/predicted_obesity_levels.csv")
+    dataframe = pd.read_csv("predicted_obesity_levels.csv")
     return dataframe
 
 
 @st.cache
 def get_model():
-    model = joblib.load('Data Scientist Bootcamp/Final/lgbm_model_final.pkl')
+    model = joblib.load('lgbm_model_final.pkl')
     return model
 
 
