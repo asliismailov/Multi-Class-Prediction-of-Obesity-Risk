@@ -22,6 +22,28 @@ def get_pipeline():
 
 main_tab, chart_tab, prediction_tab = st.tabs(["Ana Sayfa", "Grafikler", "Model"])
 
+def predict_obesity_risk(age, gender, weight, height, ch2o, fcvc, bmi):
+    # Modeli yükle
+    model = get_pipeline()
+
+    # Cinsiyeti sayısal değere dönüştür
+    gender_numeric = 1 if gender == "Male" else 0
+
+    # Tahmin yapmak için gerekli veriyi oluştur
+    data = {
+        'Age': [age],
+        'Gender': [gender_numeric],
+        'Weight': [weight],
+        'Height': [height],
+        'CH2O': [ch2o],
+        'FCVC': [fcvc],
+        'BMI': [bmi]
+    }
+
+    # Tahmin yap
+    prediction = model.predict(data)[0]
+    return prediction
+
 # Ana Sayfa ########################################################
 
 left_col, right_col = main_tab.columns(2)
@@ -58,27 +80,7 @@ with col2:
    st.image("SHAP.png")
 
 #Tahmin ########################################################
-def predict_obesity_risk(age, gender, weight, height, ch2o, fcvc, bmi):
-    # Modeli yükle
-    model = get_pipeline()
 
-    # Cinsiyeti sayısal değere dönüştür
-    gender_numeric = 1 if gender == "Male" else 0
-
-    # Tahmin yapmak için gerekli veriyi oluştur
-    data = {
-        'Age': [age],
-        'Gender': [gender_numeric],
-        'Weight': [weight],
-        'Height': [height],
-        'CH2O': [ch2o],
-        'FCVC': [fcvc],
-        'BMI': [bmi]
-    }
-
-    # Tahmin yap
-    prediction = model.predict(data)[0]
-    return prediction
 
 if prediction_tab.button("Model"):
     model_cont = st.container()
