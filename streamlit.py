@@ -81,7 +81,10 @@ with col2:
 
 #Tahmin ########################################################
 
+import streamlit as st
+from streamlit import components
 
+# Tahmin sekmesi
 if prediction_tab.button("Model"):
     model_cont = st.container()
     with model_cont:
@@ -108,4 +111,8 @@ if prediction_tab.button("Model"):
             prediction = predict_obesity_risk(selected_age, selected_gender, selected_weight, selected_height, selected_CH2O,bmi)
             st.write("Tahmin Edilen Obezite Riski:", prediction)
             st.balloons()
+
+# Dış web sayfasını göstermek için iframe kullanımı
+components.iframe("https://example.com")
+
 
