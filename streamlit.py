@@ -49,3 +49,20 @@ if chart_tab == "Grafikler":
     with col2:
         st.header("Shap")
         st.image("SHAP.png")
+
+if prediction_tab == "Model":
+    if st.session_state['tahmin']:
+        model_cont = prediction_tab.container()
+        model_cont.subheader("Tahmin")
+        col1, col2, col3 = model_cont.columns(3)
+        selected_age = col1.number_input("Yaş")
+        selected_gender = col2.number_input("Cinsiyet")
+        selected_weight = col3.number_input("Kilo")
+        selected_height = col4.number_input("Boy")
+        selected_CH2O = col5.number_input("Günlük su tüketimi")
+
+        if col6.button("Tahminle"):
+            prediction = predict_model(df, selected_age, selected_gender, selected_weight, selected_height,
+                                       selected_CH2O)
+            col6.metric(label="Tahmin Edilen Obezite Riski", value=(prediction[0]))
+            st.balloons()
