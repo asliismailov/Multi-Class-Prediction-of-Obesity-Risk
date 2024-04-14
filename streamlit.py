@@ -6,19 +6,16 @@ import numpy as np
 # Streamlit sayfa konfigürasyonu
 st.set_page_config(layout="wide", page_title="Obezite Riskinin Çok Sınıflı Tahmini", page_icon="🎷")
 
-
 # Özel önbellek ayarları
 @st.cache(allow_output_mutation=True, persist=True, suppress_st_warning=True, show_spinner=False)
 def get_data():
     dataframe = pd.read_csv("predicted_obesity_levels.csv")
     return dataframe
 
-
 @st.cache
 def get_model():
     model = joblib.load('lgbm_model_final.pkl')
     return model
-
 
 model = get_model()
 
@@ -60,7 +57,6 @@ with chart_tab:
         st.subheader("SHAP Değerleri")
         st.image("SHAP.png")
 
-
 # Tahmin sekmesi
 with prediction_tab:
     st.header("Model ile Tahmin Yapma")
@@ -79,7 +75,7 @@ with prediction_tab:
 
     if st.button("Tahminle"):
         # Cinsiyetin sayısal değerine dönüştürülmesi
-        gender_numeric = gender_dict[gender_options[selected_gender]]
+        gender_numeric = gender_options[selected_gender]
         
         # Tahmin fonksiyonunu çağırma
         prediction = predict_obesity_risk(selected_age, gender_numeric, selected_weight, selected_height, selected_ch2o)
