@@ -34,7 +34,7 @@ def predict_obesity_risk(age, gender, weight, height, ch2o, bmi):
     })
     
     # Sütunları modelin eğitildiği sıraya göre düzenle
-    expected_features = ['Age', 'Gender', 'Height', 'Weight', 'CH2O', 'BMI']  # ve diğer tüm özellikler
+    expected_features = ['Age', 'Gender', 'Weight', 'Height', 'CH2O', 'BMI']  # ve diğer tüm özellikler
     prediction = model.predict(input_data[expected_features])
     return prediction
 
