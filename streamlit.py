@@ -49,39 +49,3 @@ if chart_tab == "Grafikler":
     with col2:
         st.header("Shap")
         st.image("SHAP.png")
-
-if prediction_tab == "Model":
-    # Tahmin etme formunu oluştur
-    with st.form(key='tahmin_form'):
-        st.subheader("Tahmin")
-        # Kullanıcıdan giriş al
-        selected_age = st.number_input("Yaş")
-        selected_gender = st.selectbox("Cinsiyet", ["Erkek", "Kadın"])
-        selected_weight = st.number_input("Kilo (kg)")
-        selected_height = st.number_input("Boy (cm)")
-        selected_CH2O = st.number_input("Günlük su tüketimi (ml)")
-
-        # Tahmin et butonu
-        submitted = st.form_submit_button("Tahminle")
-
-    # Tahmin et butonuna basıldığında
-    if submitted:
-        # Verileri modelin beklediği formata getir
-        input_data = pd.DataFrame({
-            'age': [selected_age],
-            'gender': [selected_gender],
-            'weight': [selected_weight],
-            'height': [selected_height],
-            'CH2O': [selected_CH2O]
-        })
-
-        # Tahmin yap
-        prediction = model.predict(input_data)[0]
-
-        # Sonucu göster
-        st.write(f"Tahmin edilen obezite riski: {prediction}")
-
-        # Baloncuk efekti
-        st.balloons()
-
-    
