@@ -50,6 +50,10 @@ with chart_tab:
     st.header("Analitik Grafikler")
     # İsterseniz grafikleri burada gösterebilirsiniz.
 
+def calculate_bmi(height, weight):
+    bmi = weight / (height ** 2)
+    return bmi
+
 # Tahmin sekmesi
 with prediction_tab:
     st.header("Model ile Tahmin Yapma")
@@ -64,8 +68,11 @@ with prediction_tab:
         submit_button = st.form_submit_button(label='Tahminle')
 
         if submit_button:
+            # BMI hesapla
+            bmi = calculate_bmi(selected_height / 100, selected_weight)
+            
             # Tahmin fonksiyonunu çağırma
             prediction = predict_obesity_risk(selected_age, selected_gender, selected_weight, selected_height, selected_ch2o)
             st.write("Tahmin Edilen Obezite Riski:", prediction)
+            st.write("Hesaplanan BMI:", bmi)
 
-# Not: CSV dosya yolu ve model dosya yolu, kodunuzun çalıştığı ortama göre değiştirilmelidir.
