@@ -45,7 +45,7 @@ def home_page():
     st.title('Anasayfa')
 
     # Obezite oranlarını gösteren dünya haritası (yer tutucu olarak statik bir görsel)
-    st.image('/Users/ugurcanodabasi/Desktop/PycharmProjects/Data_Scientist_Bootcamp/Streamlit/Obesity_rate_(WHO,_2022).png', caption='Dünya Obezite Haritası')
+    st.image('Obesity_rate_(WHO,_2022).png', caption='Dünya Obezite Haritası')
 
     # Obezitenin çağın hastalığı olduğunu anlatan metin
     st.write("""
