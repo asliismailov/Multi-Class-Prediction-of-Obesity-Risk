@@ -66,25 +66,8 @@ def home_page():
 # Dinamik Grafikler
 def dynamic_graphs():
     st.title('Dinamik Grafikler')
-    
-    # Veri setinin içeriğini kontrol etmek için ilk 5 satırını yazdırın
-    st.write(data.head())
-
-    # Veri setinin sütun isimlerini kontrol etmek için
-    st.write(data.columns)
-
-    # Histogram oluşturmadan önce veri setini kontrol edin
-    st.write("Veri Seti Özeti:")
-    st.write(data.describe())
-
-    # Histogram oluşturma adımı
     fig = px.histogram(data, x='Age', nbins=20, title='Yaş Dağılımı')
     st.plotly_chart(fig)
-
-# main() fonksiyonu içinde dynamic_graphs() fonksiyonunu çağırmak için:
-# if page == 'Dinamik Grafikler':
-#     dynamic_graphs()
-
 
 
 import numpy as np
