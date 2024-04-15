@@ -23,19 +23,19 @@ def display_about():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.image('/Users/aslitopkoru/Desktop/Data\ Scientist/Proje/asli.jpeg', width=150)
+        st.image('asli.jpeg', width=150)
         st.markdown('**Aslı Öztürk**')
         st.markdown('[LinkedIn Profili](https://www.linkedin.com/in/ozturk-asli/)')
         st.write('Aslı, veri bilimi ve makine öğrenmesi alanlarında uzman bir araştırmacıdır. Çeşitli projelerde büyük verilerle çalışmış ve sağlık teknolojileri konusunda deneyim kazanmıştır.')
 
     with col2:
-        st.image('/Users/aslitopkoru/Desktop/Data\ Scientist/Proje/begum.jpeg', width=150)
+        st.image('begum.jpeg', width=150)
         st.markdown('**Begüm Baybora**')
         st.markdown('[LinkedIn Profili](https://www.linkedin.com/in/begumbaybora/)')
         st.write('Begüm, yapay zeka ve veri analizi konularında geniş tecrübeye sahip bir yazılım mühendisidir. Eğitim teknolojileri ve sağlık sektöründe çözümler geliştirmiştir.')
 
     with col3:
-        st.image('/Users/aslitopkoru/Desktop/Data\ Scientist/Proje/ugur.jpeg', width=150)
+        st.image('ugur.jpeg', width=150)
         st.markdown('**Uğur Can Odabaşı**')
         st.markdown('[LinkedIn Profili](https://www.linkedin.com/in/ugurcanodabasi)')
         st.write('Uğur Can, yazılım geliştirme ve sistem mühendisliği alanlarında derinlemesine bilgi sahibidir. Çeşitli endüstrilerde teknoloji çözümleri sunmuş ve teknik liderlik yapmıştır.')
