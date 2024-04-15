@@ -64,35 +64,10 @@ def home_page():
 
 
 # Dinamik Grafikler
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.animation import FuncAnimation
-
-# Boş bir çizgi grafiği oluştur
-fig, ax = plt.subplots()
-x_data, y_data = [], []
-line, = ax.plot([], [], lw=2)
-
-# Eksenlerin ayarları
-ax.set_xlim(0, 4*np.pi)
-ax.set_ylim(-1, 1)
-ax.set_title('Sine Wave Animation')
-
-# Çizgiyi güncelleyen fonksiyon
-def update(frame):
-    x_data.append(frame)
-    y_data.append(np.sin(frame))
-    line.set_data(x_data, y_data)
-    return line,
-
-# Animasyon oluşturma
-ani = FuncAnimation(fig, update, frames=np.linspace(0, 4*np.pi, 100),
-                    blit=True, interval=50)
-
-# Animasyonun gösterilmesi
-plt.show()
-
-
+def dynamic_graphs():
+    st.title('Dynamic Graphs')
+    fig = px.histogram(data, x='Age', nbins=20, title='Age Distribution')
+    st.plotly_chart(fig)
 
 import numpy as np
 import pandas as pd
