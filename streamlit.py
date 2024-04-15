@@ -5,10 +5,10 @@ import joblib
 import plotly.express as px
 
 # Modeli joblib ile yükle
-model = joblib.load("/Users/ugurcanodabasi/Desktop/PycharmProjects/lgbm_model_final.pkl")
+model = joblib.load("lgbm_model_final.pkl")
 
 # Veri setini yükle
-data = pd.read_csv("/Users/ugurcanodabasi/Desktop/PycharmProjects/predicted_obesity_levels.csv")
+data = pd.read_csv("predicted_obesity_levels.csv")
 
 def display_about():
     st.title('Hakkımızda')
