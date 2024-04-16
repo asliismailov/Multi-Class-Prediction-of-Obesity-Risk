@@ -91,6 +91,10 @@ def main():
     st.title("Class Distributions")
     create_radar_chart(data)
 
+if __name__ == "__main__":
+    main()
+
+
 
 import numpy as np
 import pandas as pd
