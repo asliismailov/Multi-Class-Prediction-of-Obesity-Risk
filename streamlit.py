@@ -64,10 +64,33 @@ def home_page():
 
 
 # Dinamik Grafikler
-def dynamic_graphs():
-    st.title('Dynamic Graphs')
-    fig = px.histogram(data, x='Age', nbins=20, title='Age Distribution')
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+def get_clean_data():
+    df = pd.read_csv('predicted_obesity_levels.csv')
+    df = df.drop(['Unnamed: 32', 'id'], axis=1)
+    df['diagnosis'] = df['diagnosis'].map({'M': 1, 'B': 0})
+    return df
+
+def create_radar_chart(df):
+    fig = px.parallel_categories(df, color="diagnosis",
+                                 color_continuous_scale=px.colors.sequential.Inferno,
+                                 labels={"diagnosis": "Diagnosis"},
+                                 title="Class Distributions")
     st.plotly_chart(fig)
+
+def main():
+    st.title("Obesity Diagnosis")
+    st.write("x")
+    # Load and clean data
+    data = get_clean_data()
+
+    # Show radar chart
+    st.title("Class Distributions")
+    create_radar_chart(data)
+
 
 import numpy as np
 import pandas as pd
