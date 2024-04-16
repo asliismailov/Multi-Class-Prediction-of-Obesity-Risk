@@ -64,32 +64,34 @@ def home_page():
 
 
 # Dinamik Grafikler
-# Dinamik Grafikler
-import plotly.express as px
 
-# Örnek veri oluşturalım (gerçek verilerinizle değiştirin)
-data = dict(
-    country=["Turkey", "USA", "Brazil", "China", "India"],
-    obesity_rate=[29.5, 36.2, 25.9, 6.2, 5.0]  # Örnek obezite oranları
-)
+def dynamic_graphs():
+    # Örnek veri oluşturalım (gerçek verilerinizle değiştirin)
+    data = {
+        'country': ["Turkey", "USA", "Brazil", "China", "India"],
+        'obesity_rate': [29.5, 36.2, 25.9, 6.2, 5.0]  # Örnek obezite oranları
+    }
 
-# Veriyi DataFrame'e çevirelim
-df = pd.DataFrame(data)
+    # Veriyi DataFrame'e çevirelim
+    df = pd.DataFrame(data)
 
-# Dünya haritasını oluşturalım
-fig = px.choropleth(
-    df,
-    locations="country",  # Ülkeleri belirtmek için 'country' sütununu kullan
-    locationmode="country names",  # Ülkeleri isimleriyle eşleştir
-    color="obesity_rate",  # Renklendirilecek değer
-    hover_name="country",  # Fareyi üzerine getirildiğinde gösterilecek metin
-    color_continuous_scale="Viridis",  # Renk skalası
-    title="Dünya Genelinde Obezite Oranları",
-    labels={"obesity_rate": "Obezite Oranı"}
-)
+    # Dünya haritasını oluşturalım
+    fig = px.choropleth(
+        df,
+        locations="country",  # Ülkeleri belirtmek için 'country' sütununu kullan
+        locationmode="country names",  # Ülkeleri isimleriyle eşleştir
+        color="obesity_rate",  # Renklendirilecek değer
+        hover_name="country",  # Fareyi üzerine getirildiğinde gösterilecek metin
+        color_continuous_scale="Viridis",  # Renk skalası
+        title="Dünya Genelinde Obezite Oranları",
+        labels={"obesity_rate": "Obezite Oranı"}
+    )
 
-# Haritayı göster
-fig.show()
+    # Haritayı göster
+    fig.show()
+
+# Diğer fonksiyonlar ve Streamlit yapılandırması aynı kalacak.
+
 
 # Obezite Tahmini
 def predict_obesity():
