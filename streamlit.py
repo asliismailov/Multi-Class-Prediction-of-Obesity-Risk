@@ -64,40 +64,32 @@ def home_page():
 
 
 # Dinamik Grafikler
-import streamlit as st
-import pandas as pd
+# Dinamik Grafikler
 import plotly.express as px
 
-def get_clean_data():
-    df = pd.read_csv('predicted_obesity_levels.csv')
-    df = df.drop(['Unnamed: 32', 'id'], axis=1)
-    df['diagnosis'] = df['diagnosis'].map({'M': 1, 'B': 0})
-    return df
+# Örnek veri oluşturalım (gerçek verilerinizle değiştirin)
+data = dict(
+    country=["Turkey", "USA", "Brazil", "China", "India"],
+    obesity_rate=[29.5, 36.2, 25.9, 6.2, 5.0]  # Örnek obezite oranları
+)
 
-def create_radar_chart(df):
-    fig = px.parallel_categories(df, color="diagnosis",
-                                 color_continuous_scale=px.colors.sequential.Inferno,
-                                 labels={"diagnosis": "Diagnosis"},
-                                 title="Class Distributions")
-    st.plotly_chart(fig)
+# Veriyi DataFrame'e çevirelim
+df = pd.DataFrame(data)
 
-def main():
-    st.title("Obesity Diagnosis")
-    st.write("x")
-    # Load and clean data
-    data = get_clean_data()
+# Dünya haritasını oluşturalım
+fig = px.choropleth(
+    df,
+    locations="country",  # Ülkeleri belirtmek için 'country' sütununu kullan
+    locationmode="country names",  # Ülkeleri isimleriyle eşleştir
+    color="obesity_rate",  # Renklendirilecek değer
+    hover_name="country",  # Fareyi üzerine getirildiğinde gösterilecek metin
+    color_continuous_scale="Viridis",  # Renk skalası
+    title="Dünya Genelinde Obezite Oranları",
+    labels={"obesity_rate": "Obezite Oranı"}
+)
 
-    # Show radar chart
-    st.title("Class Distributions")
-    create_radar_chart(data)
-
-if __name__ == "__main__":
-    main()
-
-
-
-import numpy as np
-import pandas as pd
+# Haritayı göster
+fig.show()
 
 # Obezite Tahmini
 def predict_obesity():
