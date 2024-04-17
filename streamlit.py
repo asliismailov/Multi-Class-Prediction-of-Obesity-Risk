@@ -65,16 +65,9 @@ def home_page():
 
 # Dinamik Grafikler
 
-if chart_tab == "Grafikler":
-    col1, col2 = chart_tab.columns(2)
 
-    with col1:
-        st.header("Korelasyon Matrisi")
-        st.image("korelasyon.png")
-
-    with col2:
-        st.header("Shap")
-        st.image("SHAP.png")
+import numpy as np
+import pandas as pd
 
 # Obezite Tahmini
 def predict_obesity():
