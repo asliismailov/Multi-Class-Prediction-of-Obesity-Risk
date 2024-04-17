@@ -4,10 +4,10 @@ import joblib
 import numpy as np
 
 # Modeli joblib ile yükle
-model = joblib.load("files/lightgbm_model.pkl")
+model = joblib.load("lgbm_model2.pkl")
 
 # Veri setini yükle
-data = pd.read_csv("files/predicted_obesity_levels.csv")
+data = pd.read_csv("predictions2.csv")
 
 # Kullanıcı girişlerini al
 st.title('Obezite Durumu Tahmini')
