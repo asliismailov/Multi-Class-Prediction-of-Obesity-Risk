@@ -155,8 +155,8 @@ def main():
         display_about()
     elif page == 'Homepage':
         home_page()
-    elif page == 'Dynamic Graphs':
-        dynamic_graphs()
+    elif page == 'Görseller':
+        graph_page()
     elif page == 'Predict Obesity':
         predict_obesity()
 
