@@ -3,8 +3,11 @@ import pandas as pd
 import joblib
 import numpy as np
 
-# Modelin yüklenmesi
-model = joblib.load('lgbm_model.pkl')
+# Modeli joblib ile yükle
+model = joblib.load("files/lightgbm_model.pkl")
+
+# Veri setini yükle
+data = pd.read_csv("files/predicted_obesity_levels.csv")
 
 # Kullanıcı girişlerini al
 st.title('Obezite Durumu Tahmini')
