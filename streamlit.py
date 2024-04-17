@@ -5,10 +5,10 @@ import joblib
 import plotly.express as px
 
 # Modeli joblib ile yükle
-model = joblib.load("files/lightgbm_model.pkl")
+model = joblib.load("lightgbm_model.pkl")
 
 # Veri setini yükle
-data = pd.read_csv("files/predicted_obesity_levels.csv")
+data = pd.read_csv("predicted_obesity_levels.csv")
 
 def display_about():
     st.title('Hakkımızda')
