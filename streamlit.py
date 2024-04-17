@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 
 # Modelin yüklenmesi
-model = joblib.load('Miuul_Final.pkl')
+model = joblib.load('lgbm_model.pkl')
 
 def display_about():
     st.title('Hakkımızda')
