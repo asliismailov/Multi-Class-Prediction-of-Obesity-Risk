@@ -7,9 +7,6 @@ import plotly.express as px
 # Load the model using joblib
 model = joblib.load("lgbm_model.pkl")
 
-# Load the dataset
-data = pd.read_csv("predicted_obesity_levels.csv")
-
 def display_about():
     st.title('About Us')
     st.write('''
@@ -60,8 +57,10 @@ def home_page():
     Communities and governments should develop and implement policies to facilitate access to healthy foods, promote physical activity, and enhance health education.
     """)
 
-# Dinamik Grafikler
-
+# Görseller
+def graph_page():
+    st.title('Görseller')
+    
 import streamlit as st
 
 col1, col2 = st.columns(2)
