@@ -65,9 +65,19 @@ def home_page():
 
 # Dinamik Grafikler
 
+import streamlit as st
 
-import numpy as np
-import pandas as pd
+col1, col2 = st.columns(2)
+
+with col1:
+   st.header("Korelasyon Matrisi")
+   st.image("korelasyon.png")
+
+with col2:
+   st.header("Shap")
+   st.image("SHAP.png")
+
+
 
 # Obezite Tahmini
 def predict_obesity():
