@@ -5,7 +5,7 @@ import joblib
 import plotly.express as px
 
 # Modeli joblib ile yükle
-model = joblib.load("lightgbm_model.pkl")
+model = joblib.load("lgbm_model.pkl")
 
 # Veri setini yükle
 data = pd.read_csv("predicted_obesity_levels.csv")
