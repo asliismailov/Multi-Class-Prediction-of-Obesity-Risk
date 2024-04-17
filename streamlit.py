@@ -60,6 +60,20 @@ def home_page():
     Communities and governments should develop and implement policies to facilitate access to healthy foods, promote physical activity, and enhance health education.
     """)
 
+# Dinamik Grafikler
+
+import streamlit as st
+
+col1, col2 = st.columns(2)
+
+with col1:
+   st.header("Korelasyon Matrisi")
+   st.image("korelasyon.png")
+
+with col2:
+   st.header("Shap")
+   st.image("SHAP.png")
+
 # Predict Obesity
 def predict_obesity():
     st.title('Predict Obesity Status')
